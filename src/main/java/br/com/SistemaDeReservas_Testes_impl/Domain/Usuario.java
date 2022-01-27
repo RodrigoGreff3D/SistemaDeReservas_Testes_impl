@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Entity
@@ -17,8 +18,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class Usuario {
-
-    public static final String REGEX_CPF = "[0-9]{11}";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,8 +33,8 @@ public class Usuario {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String senha;
 
-    @NotBlank
-    @Pattern(regexp = REGEX_CPF, message = "O CPF deve ser informado no formato 99999999999.")
+    @Size(min = 11, max = 11, message = "O CPF deve ser informado no formato 99999999999.")
+    @Pattern(regexp = "[0-9]+", message = "O CPF deve ser informado no formato 99999999999.")
     private String cpf;
 
     @NotNull
